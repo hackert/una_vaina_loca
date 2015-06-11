@@ -1,0 +1,105 @@
+<?php /* @var $this Controller */ ?>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta name="language" content="en">
+
+        <!-- blueprint CSS framework -->
+        <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/screen.css" media="screen, projection">
+        <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/print.css" media="print">
+        <!--[if lt IE 8]>
+        <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/ie.css" media="screen, projection">
+        <![endif]-->
+
+        <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/main.css">
+        <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/form.css">
+
+        <title><?php echo CHtml::encode($this->pageTitle); ?></title>
+    </head>
+
+    <body>
+
+        <div class="container-fluid" id="">
+
+            <div id="header">
+                <div id="logo"><img src="<?php echo Yii::app()->request->baseUrl; ?>/images/Ipostel _cintillo_institucional.jpg" width="100%" style="width:100%"></div>
+            </div><!-- header -->
+
+            <div class="mainmenu">
+                <?php
+                $this->widget(
+                        'booster.widgets.TbNavbar', array(
+                    'type' => 'inverse',
+                    'brand' => 'Tracking',
+                    'brandUrl' => '#',
+                    'collapse' => true, // requires bootstrap-responsive.css
+                    'fixed' => false,
+                    'fluid' => true,
+                    'items' => array(
+                        array(
+                            'class' => 'booster.widgets.TbMenu',
+                            'type' => 'navbar',
+                            'items' => array(
+                                array('label' => 'Inicio', 'url' => array('/site/index')),
+                                array('label' => 'Admisión', 'url' => array('/admision/admin')),
+                                array('label' => 'Registro Envío', 'url' => array('/envio/admin', 'view' => 'about')),
+                                array('label' => 'Despachos', 'url' => array('/despacho/admin')),
+                              //  array('label' => 'Transito', 'url' => array('/bitacoraTransito/create')),
+                               // array('label' => 'Apertura', 'url' => array('/apertura/create')),
+                                array(
+                                    'label' => 'Flota-Vehiculo',
+                                    'items' => array(
+                                        array('label' => 'Tipo-Vehiculo', 'url' => array('/tipoVehiculo/admin')),
+                                        array('label' => 'Modelo', 'url' => array('/modelo/admin')),
+                                        array('label' => 'Marca', 'url' => array('/marca/admin')),
+                                        array('label' => 'Flota-Vehiculo', 'url' => array('/vehiculo/admin')),
+                                        array('label' => 'GPS', 'url' => array('/gps/admin')),
+                                        
+                                    )
+                                ),
+                               
+                                   array('label' => 'Encaminamiento', 'url' => array('/BitacoraTransito/admin', 'view' => 'about'), 'visible' => !Yii::app()->user->isGuest),
+                                array('label' => 'Paquetes',
+                                    'items' => array(
+                                       array('label' => 'Entrada', 'url' => array('/BitacoraTransito/create','opc'=>1, 'item'=>Yii::app()->user->id)),
+                                       array('label' => 'Salida', 'url' => array('/BitacoraTransito/create','opc'=>2, 'item'=>Yii::app()->user->id)),
+                                    ), 'visible' => !Yii::app()->user->isGuest),
+                                array('label' => 'Administrar Usuarios'
+                                    , 'url' => Yii::app()->user->ui->userManagementAdminUrl
+                                    , 'visible' => !Yii::app()->user->isGuest),
+                                array('label' => 'Login'
+                                    , 'url' => Yii::app()->user->ui->loginUrl
+                                    , 'visible' => Yii::app()->user->isGuest),
+                                array('label' => 'Logout (' . Yii::app()->user->name . ')'
+                                    , 'url' => Yii::app()->user->ui->logoutUrl
+                                    , 'visible' => !Yii::app()->user->isGuest),
+                            ),
+                        ),
+                    ),
+                        )
+                );
+                ?>
+            </div><!-- mainmenu -->
+                <?php if (isset($this->breadcrumbs)): ?>
+                    <?php
+                    $this->widget('zii.widgets.CBreadcrumbs', array(
+                        'links' => $this->breadcrumbs,
+                    ));
+                    ?><!-- breadcrumbs -->
+            <?php endif ?>
+
+            <?php echo $content; ?>
+
+            <div class="clear"></div>
+
+            <div id="footer">
+                Copyright &copy; <?php echo date('Y'); ?>  Ipostel.<br/>
+                Todos los derechos reservados.<br/>
+<?php echo Yii::powered(); ?>
+            </div><!-- footer -->
+
+        </div><!-- page -->
+
+    </body>
+</html>
