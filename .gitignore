@@ -1,0 +1,9 @@
+/nbproject/private/
+protected/runtime/*.log
+assets/*
+/assets/*
+protected/config/main.php
+/protected/config/main.php
+protected/config/*
+
+/protocolizacion/protected/config/main.php
